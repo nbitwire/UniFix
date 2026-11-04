@@ -1,0 +1,178 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard | UniFix</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body class="dashboard-page">
+
+    <div class="dashboard-layout">
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+
+            <div class="sidebar-brand">
+                <h1>UniFix<span>.</span></h1>
+                <p>ACCOMMODATION SUPPORT</p>
+            </div>
+
+            <div class="sidebar-label">MENU</div>
+
+            <nav class="sidebar-nav">
+                <a href="/dashboard" class="sidebar-link active">
+                    <span>▦</span> Dashboard
+                </a>
+
+                <a href="#requests" class="sidebar-link">
+                    <span>▤</span> My Requests
+                </a>
+            </nav>
+
+            <div class="sidebar-bottom">
+                <div class="sidebar-support">
+                    <span class="support-symbol">✦</span>
+                    <p>Need accommodation support?</p>
+                    <small>UniFix is here to help.</small>
+                </div>
+
+                <a href="/logout" class="logout-link">
+                    <span>↪</span> Log Out
+                </a>
+            </div>
+
+        </aside>
+
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+
+            <div class="dashboard-topbar">
+                <div>
+                    <p class="topbar-label">STUDENT PORTAL</p>
+                    <p class="topbar-title">My Dashboard</p>
+                </div>
+
+                <div class="student-profile">
+                    <div class="profile-avatar">{{ name[0] }}</div>
+                    <div>
+                        <strong>{{ name }}</strong>
+                        <small>Student Account</small>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Welcome Banner -->
+            <section class="dashboard-welcome">
+                <div class="welcome-text">
+                    <span class="welcome-tag">YOUR ACCOMMODATION, SIMPLIFIED</span>
+
+                    <h2>Welcome back, {{ name }}!</h2>
+
+                    <p>
+                        Keep track of your maintenance requests
+                        and stay updated on your accommodation.
+                    </p>
+                </div>
+
+                <div class="welcome-decoration">⌂</div>
+            </section>
+
+
+            <!-- Overview -->
+            <section class="dashboard-overview">
+
+                <div class="overview-card">
+                    <div class="overview-icon teal-icon">▤</div>
+                    <div>
+                        <p>Total Requests</p>
+                        <h3>{{ maintenance_requests|length }}</h3>
+                        <small>Your submitted maintenance requests</small>
+                    </div>
+                </div>
+
+                <div class="overview-card">
+                    <div class="overview-icon gold-icon">✦</div>
+                    <div>
+                        <p>Support Service</p>
+                        <h3>UniFix</h3>
+                        <small>Here to support your student home</small>
+                    </div>
+                </div>
+
+            </section>
+
+
+            <!-- Maintenance Requests -->
+            <section class="requests-section" id="requests">
+
+                <div class="requests-heading">
+                    <div>
+                        <span class="section-eyebrow">ACCOMMODATION</span>
+                        <h2>My Maintenance Requests</h2>
+                        <p>View your reported issues and their latest status.</p>
+                    </div>
+
+                    <span class="request-count">
+                        {{ maintenance_requests|length }} Requests
+                    </span>
+                </div>
+
+
+                {% for request_id, record in maintenance_requests.items() %}
+
+                    <div class="dashboard-request-card">
+
+                        <div class="request-icon">⌂</div>
+
+                        <div class="request-information">
+                            <span class="request-reference">
+                                REQUEST #{{ request_id }}
+                            </span>
+
+                            <h3>{{ record.title }}</h3>
+
+                            <p>⌖ {{ record.location }}</p>
+                        </div>
+
+                        <div class="request-action">
+                            <span class="request-status">
+                                {{ record.status }}
+                            </span>
+
+                            <a href="{{ url_for('view_request', request_id=request_id) }}">
+                                View Details →
+                            </a>
+                        </div>
+
+                    </div>
+
+                {% else %}
+
+                    <div class="empty-state">
+                        <h3>No maintenance requests yet</h3>
+                        <p>You currently have no reported maintenance issues.</p>
+                    </div>
+
+                {% endfor %}
+
+            </section>
+
+
+            <footer class="dashboard-footer">
+                © 2026 UniFix · Student Accommodation Support
+            </footer>
+
+        </main>
+
+    </div>
+
+</body>
+</html>

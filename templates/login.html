@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Login | UniFix</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>UniFix</h1>
+        <p>Student Accommodation Support</p>
+    </header>
+
+    <main>
+        <h2>Student Login</h2>
+        <p>Sign in to manage your maintenance requests.</p>
+
+        {% if error %}
+            <p style="color: red;">{{ error }}</p>
+        {% endif %}
+
+        <form method="POST">
+            <label for="email">University email</label><br>
+            <input type="email" id="email" name="email" required>
+            <br><br>
+
+            <label for="password">Password</label><br>
+            <input type="password" id="password" name="password" required>
+            <br><br>
+
+            <button type="submit" class="button">Sign In</button>
+        </form>
+    </main>
+</body>
+</html>

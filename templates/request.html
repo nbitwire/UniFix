@@ -1,0 +1,65 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maintenance Request | UniFix</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <header>
+        <div class="navbar">
+            <h1>UniFix<span>.</span></h1>
+            <a href="/logout" class="nav-login">Log Out</a>
+        </div>
+    </header>
+
+    <main class="request-container">
+
+        <a href="/dashboard" style="color: #168C89; font-size: 13px; font-weight: 600;">
+            ← Back to Dashboard
+        </a>
+
+        <div class="request-detail-card">
+
+            <span class="section-eyebrow">MAINTENANCE REQUEST</span>
+
+            <h2>{{ record.title }}</h2>
+
+            <p style="color: #168C89; font-weight: 600; font-size: 12px;">
+                REQUEST #{{ request_id }}
+            </p>
+
+            <hr style="border: none; border-top: 1px solid #E5EBEF; margin: 25px 0;">
+
+            <div>
+                <p><strong>Location</strong></p>
+                <p>{{ record.location }}</p>
+            </div>
+
+            <div style="margin-top: 22px;">
+                <p><strong>Description</strong></p>
+                <p>{{ record.description }}</p>
+            </div>
+
+            <div style="margin-top: 22px;">
+                <p><strong>Current Status</strong></p>
+                <span class="request-status">{{ record.status }}</span>
+            </div>
+
+        </div>
+
+        <p style="text-align: center; color: #7A8A96; font-size: 11px; margin-top: 25px;">
+            © 2026 UniFix · Student Accommodation Support
+        </p>
+
+    </main>
+
+</body>
+</html>
